@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Login from './paginas/Auth/login';
 import Registrar from './paginas/Auth/register';
-import { Home } from './paginas/Home';
+import { Home } from './components/Home';
 import { useState } from 'react';
 
 function App() {
