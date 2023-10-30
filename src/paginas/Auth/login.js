@@ -1,19 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../../css/login.css';
+import { useState } from "react";
 
-const Login = () => {
+const Login = ({setUser}) => {
+
+ const [Email, setEmail] = useState("");
+ const [Password, setPassword] = useState("");
+ const [Error, setError] =  useState(false);
+
+const hanndleSubmit = (e) =>{
+  e.preventDefault()
+
+  if (Email === "" || Password === ""){
+    setError(true)
+    return
+  }
+
+  setError(false)
+
+  setUser(Email)
+
+
+}
+
     return (
-        <div className="login-box">
-  <div className="login-logo">
-    <Link to="../../index2.html"><b>Iniciar </b>Sesión</Link>
-  </div>
+  <div className="login-box">
+    
   {/* /.login-logo */}
   <div className="card">
     <div className="card-body login-card-body">
-      <p className="login-box-msg">Bienvenido, ingrese sus credenciales</p>
-      <form action="../../index3.html" method="post">
+    <div className="login-logo">
+    <Link to="../../index2.html"><b>Iniciar </b>Sesión</Link>
+  </div>
+      <p className="login-box-msg">Bienvenido, ingrese sus credenciales:</p>
+      <form action="../../index3.html" method="post" onSubmit={hanndleSubmit}> 
+   
         <div className="input-group mb-3">
           <input type="email" className="form-control"
+           value={Email}
+           onChange={e => setEmail(e.target.value)}
            placeholder="Email"
            id="Email"
            name="Email" />
@@ -25,6 +51,8 @@ const Login = () => {
         </div>
         <div className="input-group mb-3">
           <input type="password" className="form-control"
+           value={Password}
+           onChange={e => setPassword(e.target.value)}
            placeholder="Password" 
            id="Password"
            name="Password"/>
@@ -35,20 +63,22 @@ const Login = () => {
           </div>
         </div>
      
-      <div className="social-auth-links text-center mb-3">
-        <button type='submit' className="btn btn-block btn-primary">
-          <i className="fab fa-facebook mr-2" /> Ingresar
-        </button>
-        <Link to="#" className="btn btn-block btn-danger">
-          <i className="fab fa-google-plus mr-2" /> Crear Cuenta
+        <div className="social-auth-links text-center mb-3">
+      <Link to={"Home"} className="btn btn-block btn-light">
+          <i className="fa fa-registered" /> Ingresar
+        </Link>
+        <Link to={"register"} className="btn btn-block btn-light">
+          <i className="fa fa-registered" /> Crear Cuenta
         </Link>
       </div>
       </form>
+      {Error && <p>Todos los campos son obligatorios</p>}
       {/* /.social-auth-links */}
     </div>
     {/* /.login-card-body */}
   </div>
 </div>
+
 
     );
 }
